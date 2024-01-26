@@ -53,6 +53,16 @@ function Accounts() {
     { id: "Action", label: "Actions", minWidth: 170 },
   ];
 
+  const handleAddAccount = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
+
+  const handleEditAccount = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -65,7 +75,11 @@ function Accounts() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <AccountForm />
+            <AccountForm
+              addFunc={handleAddAccount}
+              editForm={false}
+              editFunc={handleEditAccount}
+            />
           </Box>
         </Modal>
         <Modal
@@ -75,10 +89,14 @@ function Accounts() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <LoginForm />
+            <AccountForm
+              addFunc={handleAddAccount}
+              editForm={true}
+              editFunc={handleEditAccount}
+            />
           </Box>
         </Modal>
-        <div className="flex justify-between items-center mb-4 gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
           <h3 className="text-2xl font-bold">Account Table</h3>
           <div className="flex gap-3">
             <div className="flex gap-3">
@@ -135,7 +153,7 @@ function Accounts() {
                       <Button
                         variant="contained"
                         onClick={() => {
-                          console.log("Clicked");
+                          handleEditOpen();
                         }}
                       >
                         Edit

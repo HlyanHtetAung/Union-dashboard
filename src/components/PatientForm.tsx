@@ -1,13 +1,9 @@
 import {
   Container,
   FormControl,
-  FormControlLabel,
   FormHelperText,
-  FormLabel,
   InputLabel,
   MenuItem,
-  Radio,
-  RadioGroup,
   Select,
 } from "@mui/material";
 
@@ -21,18 +17,17 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 
-export default function PatientForm() {
-  //   {
-  //   addFunc,
-  //   editForm,
-  //   editFunc,
-  //   selectedPatient,
-  // }: {
-  //   addFunc: () => void;
-  //   editForm: boolean;
-  //   editFunc: () => void;
-  //   selectedPatient: boolean;
-  // }
+export default function PatientForm({
+  addFunc,
+  editForm,
+  editFunc,
+}: // selectedPatient,
+{
+  addFunc: (name: string, test: string) => void;
+  editForm: boolean;
+  editFunc: (name: string, test: string) => void;
+  // selectedPatient: boolean;
+}) {
   const {
     register,
     handleSubmit,
@@ -51,16 +46,25 @@ export default function PatientForm() {
   });
 
   const onSubmit = async (data: any) => {
-    // editForm ? editFunc() : addFunc();
     const { name, sex, age, address, treatmentStartDate, vot } = data;
-    console.log(name, sex, age, address, treatmentStartDate.toISOString(), vot);
+    if (editForm == true) {
+      editFunc("Edit", "kwa");
+      return;
+    }
+
+    if (editForm == false) {
+      addFunc("Add", "kwa");
+      return;
+    }
   };
 
   useEffect(() => {}, []);
 
   return (
     <Container maxWidth="md" className="mt-8">
-      <h3 className="text-center text-2xl my-4">Patient Form</h3>
+      <h3 className="text-center text-2xl my-4">
+        Patient {">>"} {editForm == true ? "Edit" : "Add"}
+      </h3>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -75,10 +79,6 @@ export default function PatientForm() {
           }}
           {...register("name", {
             required: true,
-            validate: {
-              matchPattern: (v: any) =>
-                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v),
-            },
           })}
           type="text"
           error={!!errors.name}
@@ -128,10 +128,6 @@ export default function PatientForm() {
           }}
           {...register("address", {
             required: true,
-            validate: {
-              matchPattern: (v: any) =>
-                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v),
-            },
           })}
           type="text"
           error={!!errors.address}

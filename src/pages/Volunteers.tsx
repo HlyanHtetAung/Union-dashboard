@@ -52,6 +52,15 @@ function Volunteers() {
     { id: "Action", label: "Actions", minWidth: 170 },
   ];
 
+  const handleAddVolunteer = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
+
+  const handleEditVolunteer = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
   useEffect(() => {}, []);
 
   return (
@@ -64,7 +73,11 @@ function Volunteers() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <VolunteerForm />
+            <VolunteerForm
+              addFunc={handleAddVolunteer}
+              editForm={false}
+              editFunc={handleEditVolunteer}
+            />
           </Box>
         </Modal>
         <Modal
@@ -74,10 +87,14 @@ function Volunteers() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <VolunteerForm />
+            <VolunteerForm
+              addFunc={handleAddVolunteer}
+              editForm={true}
+              editFunc={handleEditVolunteer}
+            />
           </Box>
         </Modal>
-        <div className="flex justify-between items-center mb-4 gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
           <h3 className="text-2xl font-bold">Volunteers Table</h3>
           <div className="flex gap-3">
             <div className="flex gap-3">
@@ -93,7 +110,7 @@ function Volunteers() {
               onChange={() => console.log("hello")}
               sx={{ width: 350 }}
               id="outlined-basic"
-              label="search account"
+              label="search volunteer"
               variant="outlined"
               InputProps={{
                 startAdornment: (

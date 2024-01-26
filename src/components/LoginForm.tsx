@@ -63,9 +63,6 @@ export default function LoginForm() {
           variant="outlined"
           {...register("password", {
             required: true,
-            validate: {
-              minLength: (v: any) => v.length >= 8,
-            },
           })}
           InputLabelProps={{
             shrink: true,
@@ -73,13 +70,7 @@ export default function LoginForm() {
           type="password"
           error={!!errors.password}
           helperText={
-            errors.password?.type == "minLength"
-              ? "Password character should be at least 8"
-              : errors.password?.type == "matchPattern"
-              ? "Password should be including capital letter, symbol and number digits"
-              : errors.password?.type == "required"
-              ? "Password is required"
-              : ""
+            errors.password?.type == "required" ? "Password is required" : ""
           }
         />
 

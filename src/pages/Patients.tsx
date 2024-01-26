@@ -66,6 +66,16 @@ function Patients() {
     },
   ];
 
+  const handleAddPatient = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
+
+  const handleEditPatient = (name: string, test: string): void => {
+    console.log(name);
+    console.log(test);
+  };
+
   useEffect(() => {}, []);
 
   return (
@@ -78,7 +88,11 @@ function Patients() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <PatientForm />
+            <PatientForm
+              addFunc={handleAddPatient}
+              editFunc={handleEditPatient}
+              editForm={false}
+            />
           </Box>
         </Modal>
         <Modal
@@ -88,10 +102,14 @@ function Patients() {
           aria-describedby="modal-modal-description"
         >
           <Box sx={style}>
-            <PatientForm />
+            <PatientForm
+              addFunc={handleAddPatient}
+              editFunc={handleEditPatient}
+              editForm={true}
+            />
           </Box>
         </Modal>
-        <div className="flex justify-between items-center mb-4 gap-3">
+        <div className="flex flex-col md:flex-row justify-between items-center mb-4 gap-3">
           <h3 className="text-2xl font-bold">Patients Table</h3>
           <div className="flex gap-3">
             <div className="flex gap-3">
@@ -107,7 +125,7 @@ function Patients() {
               onChange={() => console.log("hello")}
               sx={{ width: 350 }}
               id="outlined-basic"
-              label="search account"
+              label="search patients"
               variant="outlined"
               InputProps={{
                 startAdornment: (

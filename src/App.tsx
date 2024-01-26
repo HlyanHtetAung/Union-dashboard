@@ -18,7 +18,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/">
-              <Route index element={<Home />} />
+              <Route path={"Union-dashboard/"} element={<Home />} />
               <Route path={ACCOUNT_ROUTE} element={<Accounts />} />
               <Route path={VOLUNTEER_ROUTE} element={<Volunteers />} />
               <Route path={PATIENTS_ROUTE} element={<Patients />} />

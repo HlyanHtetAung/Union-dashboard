@@ -12,7 +12,17 @@ import Button from "@mui/material/Button";
 import { Controller, useForm } from "react-hook-form";
 import { ROLES } from "../utils";
 
-export default function AccountForm() {
+export default function AccountForm({
+  addFunc,
+  editForm,
+  editFunc,
+}: // selectedPatient,
+{
+  addFunc: (name: string, test: string) => void;
+  editForm: boolean;
+  editFunc: (name: string, test: string) => void;
+  // selectedPatient: boolean;
+}) {
   const {
     register,
     handleSubmit,
@@ -31,11 +41,19 @@ export default function AccountForm() {
   const onSubmit = async (data: any) => {
     const { userName, password, email, role } = data;
     console.log(userName, password, email, role);
+    if (editForm == true) {
+      editFunc("Hello", "2323");
+    }
+    if (editForm == false) {
+      addFunc("Hello", "222");
+    }
   };
 
   return (
     <Container maxWidth="md" className="mt-8">
-      <h3 className="text-center text-2xl my-4">Account Form</h3>
+      <h3 className="text-center text-2xl my-4">
+        Account {">>"} {editForm == true ? "Edit" : "Add"}
+      </h3>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -50,21 +68,14 @@ export default function AccountForm() {
           }}
           {...register("userName", {
             required: true,
-            validate: {
-              matchPattern: (v: any) =>
-                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v),
-            },
           })}
           type="text"
           error={!!errors.userName}
           helperText={
-            errors.userName?.type == "matchPattern"
-              ? "Username should be the email format (Test2024@gmail.com)"
-              : errors.userName?.type == "required"
-              ? "Username is required"
-              : ""
+            errors.userName?.type == "required" ? "Username is required" : ""
           }
         />
+
         <TextField
           id="outlined-basic"
           label="Email"
@@ -83,9 +94,9 @@ export default function AccountForm() {
           error={!!errors.email}
           helperText={
             errors.email?.type == "matchPattern"
-              ? "Username should be the email format (Test2024@gmail.com)"
+              ? "Email should be that format (Test2024@gmail.com)"
               : errors.email?.type == "required"
-              ? "Username is required"
+              ? "Email is required"
               : ""
           }
         />
@@ -97,19 +108,23 @@ export default function AccountForm() {
           {...register("password", {
             required: true,
             validate: {
-              minLength: (v: any) => v.length >= 8,
+              minLength: (v: any) => v.length == 8,
+              matchPattern: (v: any) =>
+                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:"<>?[\];',./\\])\S{8,}$/.test(
+                  v
+                ),
             },
           })}
           InputLabelProps={{
             shrink: true,
           }}
-          type="password"
+          type="text"
           error={!!errors.password}
           helperText={
             errors.password?.type == "minLength"
-              ? "Password character should be at least 8"
+              ? "Only 8 character is allowed for password!"
               : errors.password?.type == "matchPattern"
-              ? "Password should be including capital letter, symbol and number digits"
+              ? "Password must include capital letter, symbol and number digits"
               : errors.password?.type == "required"
               ? "Password is required"
               : ""
@@ -137,15 +152,6 @@ export default function AccountForm() {
         />
 
         <div className="flex gap-20 pb-5">
-          {/* <Button
-            className="flex-1 bg-blue-600"
-            variant="contained"
-            onClick={() => {
-              reset();
-            }}
-          >
-            Reset
-          </Button> */}
           <Button
             type="submit"
             variant="contained"

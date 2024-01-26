@@ -1,17 +1,20 @@
-import {
-  Container,
-  FormControl,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-} from "@mui/material";
+import { Container } from "@mui/material";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useForm } from "react-hook-form";
 
-export default function VolunteerForm() {
+export default function VolunteerForm({
+  addFunc,
+  editForm,
+  editFunc,
+}: // selectedPatient,
+{
+  addFunc: (name: string, test: string) => void;
+  editForm: boolean;
+  editFunc: (name: string, test: string) => void;
+  // selectedPatient: boolean;
+}) {
   const {
     register,
     handleSubmit,
@@ -27,13 +30,15 @@ export default function VolunteerForm() {
   });
 
   const onSubmit = async (data: any) => {
-    const { userName, password, email, role } = data;
-    console.log(userName, password, email, role);
+    const { name, account, password } = data;
+    console.log(name, account, password);
   };
 
   return (
     <Container maxWidth="md" className="mt-8">
-      <h3 className="text-center text-2xl my-4">Volunteer Form</h3>
+      <h3 className="text-center text-2xl my-4">
+        Volunteer {">>"} {editForm == true ? "Edit" : "Add"}
+      </h3>
       <form
         noValidate
         onSubmit={handleSubmit(onSubmit)}
@@ -48,10 +53,6 @@ export default function VolunteerForm() {
           }}
           {...register("name", {
             required: true,
-            validate: {
-              matchPattern: (v: any) =>
-                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v),
-            },
           })}
           type="text"
           error={!!errors.name}
@@ -68,10 +69,6 @@ export default function VolunteerForm() {
           }}
           {...register("account", {
             required: true,
-            validate: {
-              matchPattern: (v: any) =>
-                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v),
-            },
           })}
           type="text"
           error={!!errors.account}
@@ -87,7 +84,11 @@ export default function VolunteerForm() {
           {...register("password", {
             required: true,
             validate: {
-              minLength: (v: any) => v.length >= 8,
+              minLength: (v: any) => v.length == 8,
+              matchPattern: (v: any) =>
+                /^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*()_+{}|:"<>?[\];',./\\])\S{8,}$/.test(
+                  v
+                ),
             },
           })}
           InputLabelProps={{
@@ -97,9 +98,9 @@ export default function VolunteerForm() {
           error={!!errors.password}
           helperText={
             errors.password?.type == "minLength"
-              ? "Password character should be at least 8"
+              ? "Only 8 character is allowed for password!"
               : errors.password?.type == "matchPattern"
-              ? "Password should be including capital letter, symbol and number digits"
+              ? "Password must include capital letter, symbol and number digits"
               : errors.password?.type == "required"
               ? "Password is required"
               : ""
