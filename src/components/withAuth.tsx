@@ -9,28 +9,6 @@ function withAuth(Component: any) {
     const navigate = useNavigate();
     const [loggedIn, setLoggedIn] = useState(true);
 
-    // useEffect(() => {
-    //   setDomLoaded(true);
-    // }, []);
-
-    // useEffect(() => {
-    //   const token = Cookies.get("token");
-    //   const userLoggedInStatus = token;
-    //   if (!userLoggedInStatus) {
-    //     redirect("/login");
-    //   }
-    // }, []);
-
-    // if (!Cookies.get("token")) {
-    //   return domLoaded && null;
-    // }
-
-    // useEffect(() => {
-    //   if (domLoaded == true) {
-    //     navigate("/login");
-    //   }
-    // });
-
     const toRenderJSX =
       loggedIn == false ? (
         <div className="flex items-center justify-center mt-[40vh]">
