@@ -14,13 +14,25 @@ import {
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { Controller, useForm } from "react-hook-form";
-import { ROLES, SEX } from "../utils";
+import { SEX } from "../utils";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { DatePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from "dayjs";
+import { useEffect } from "react";
 
 export default function PatientForm() {
+  //   {
+  //   addFunc,
+  //   editForm,
+  //   editFunc,
+  //   selectedPatient,
+  // }: {
+  //   addFunc: () => void;
+  //   editForm: boolean;
+  //   editFunc: () => void;
+  //   selectedPatient: boolean;
+  // }
   const {
     register,
     handleSubmit,
@@ -39,9 +51,12 @@ export default function PatientForm() {
   });
 
   const onSubmit = async (data: any) => {
+    // editForm ? editFunc() : addFunc();
     const { name, sex, age, address, treatmentStartDate, vot } = data;
     console.log(name, sex, age, address, treatmentStartDate.toISOString(), vot);
   };
+
+  useEffect(() => {}, []);
 
   return (
     <Container maxWidth="md" className="mt-8">
@@ -70,28 +85,6 @@ export default function PatientForm() {
           helperText={errors.name?.type == "required" ? "Name is required" : ""}
         />
 
-        {/* <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">Gender</FormLabel>
-          <RadioGroup
-            row
-            aria-labelledby="demo-row-radio-buttons-group-label"
-            name="row-radio-buttons-group"
-          >
-            <FormControlLabel
-              value="female"
-              control={<Radio />}
-              label="Female"
-            />
-            <FormControlLabel value="male" control={<Radio />} label="Male" />
-            <FormControlLabel value="other" control={<Radio />} label="Other" />
-            <FormControlLabel
-              value="disabled"
-              disabled
-              control={<Radio />}
-              label="other"
-            />
-          </RadioGroup>
-        </FormControl> */}
         <Controller
           name="sex"
           control={control}
