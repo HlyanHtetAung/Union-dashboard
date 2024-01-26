@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.1b561622.css",
-    "main.js": "/static/js/main.2d227536.js",
-    "static/js/787.0b31c7c0.chunk.js": "/static/js/787.0b31c7c0.chunk.js",
-    "index.html": "/index.html",
-    "main.1b561622.css.map": "/static/css/main.1b561622.css.map",
-    "main.2d227536.js.map": "/static/js/main.2d227536.js.map",
-    "787.0b31c7c0.chunk.js.map": "/static/js/787.0b31c7c0.chunk.js.map"
+    "main.css": "/Union-dashboard/static/css/main.1b561622.css",
+    "main.js": "/Union-dashboard/static/js/main.8c22a214.js",
+    "static/js/787.0b31c7c0.chunk.js": "/Union-dashboard/static/js/787.0b31c7c0.chunk.js",
+    "index.html": "/Union-dashboard/index.html",
+    "main.1b561622.css.map": "/Union-dashboard/static/css/main.1b561622.css.map",
+    "main.8c22a214.js.map": "/Union-dashboard/static/js/main.8c22a214.js.map",
+    "787.0b31c7c0.chunk.js.map": "/Union-dashboard/static/js/787.0b31c7c0.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1b561622.css",
-    "static/js/main.2d227536.js"
+    "static/js/main.8c22a214.js"
   ]
 }
