@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "gh-pages": "^6.1.1",
-    "homepage": "http://hlyanhtetaung.github.io/Union-dashboard",
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "homepage": "http://HlyanHtetAung.github.io/Union-dashboard"
 }
